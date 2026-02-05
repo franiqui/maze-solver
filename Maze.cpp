@@ -1,6 +1,7 @@
 #include "Maze.h"
 #include <stdexcept>
 #include <iostream>
+#include <memory>
 
 Maze::Maze(const std::vector<std::string>& grid) {
     setData(grid);
@@ -15,6 +16,8 @@ void Maze::setData(const std::vector<std::string>& grid) {
     for (std::size_t i = 0; i < rows_; i++) {
         for (std::size_t j = 0; j < columns_; j++) {
             grid_[i][j] = charToInt(grid[i][j]);
+            if(grid[i][j] == 'S') start_ = {i,j};
+            else if(grid[i][j] == 'E') end_ = {i,j};
         }
     }
 }
@@ -39,7 +42,7 @@ void Maze::ValidInput(const std::vector<std::string>& grid) const {
         }
     }
     if (startCount != 1 || exitCount != 1) {
-        throw std::invalid_argument("There should only be 1 Start and 1 Exit");
+        throw std::invalid_argument("There should only be 1 Start and 1 End");
     }
 }
 
@@ -53,6 +56,31 @@ int Maze::charToInt(char c) const {
             throw std::invalid_argument("Invalid maze character");
     }
 }
+
+bool Maze::isWall(std::size_t row, std::size_t col) const {
+    return (grid_[row][col] == 0);
+}
+
+bool Maze::isExit(std::size_t row, std::size_t col) const {
+    return (grid_[row][col] == 3);
+}
+
+std::size_t Maze::totalRows() const {
+    return rows_;
+}
+
+std::size_t Maze::totalCols() const {
+    return columns_;
+}
+
+std::pair<std::size_t, std::size_t> Maze::start() const {
+    return start_;
+}
+
+std::pair<std::size_t, std::size_t> Maze::end() const {
+    return end_;
+}
+
 
 void Maze::printNumericMaze() const {
     std::cout << "\n";
