@@ -5,12 +5,14 @@
 #include <cstddef>
 #include <queue>
 #include <vector>
+#include <iostream>
 
 class Solver {
 protected:
     Maze& maze_;
     std::vector<std::vector<bool>> visited_;
     std::vector<std::pair<std::size_t, std::size_t>> solution_;
+    std::vector<std::vector<std::pair<std::size_t, std::size_t>>> parent_;
 
 public:
     explicit Solver(Maze& maze);
@@ -24,6 +26,9 @@ public:
 
     void visit(std::size_t row, std::size_t col);
     bool isVisited(std::size_t row, std::size_t col);
+
+    std::vector<std::pair<std::size_t, std::size_t>> solution() const;
+
 };
 
 #endif // SOLVER_H

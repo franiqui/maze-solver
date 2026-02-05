@@ -9,6 +9,7 @@
 class Maze {
 private:
     std::vector<std::vector<int>> grid_;
+    std::vector<std::string> chargrid_;
     std::size_t rows_;
     std::size_t columns_;
     std::pair<std::size_t, std::size_t> start_;
@@ -32,6 +33,9 @@ public:
     std::pair<std::size_t, std::size_t> end() const;
 
     void printNumericMaze() const;
+
+    void printWithoutSolution() const;
+    void printWithSolution(const std::vector<std::pair<std::size_t, std::size_t>>& solution);
 
 }; 
 #endif // MAZE_H

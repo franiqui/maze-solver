@@ -10,6 +10,7 @@ Maze::Maze(const std::vector<std::string>& grid) {
 
 void Maze::setData(const std::vector<std::string>& grid) {
     ValidInput(grid);
+    chargrid_ = grid;
     rows_ = grid.size();
     columns_ = grid[0].size();
     grid_.assign(rows_, std::vector<int>(columns_));
@@ -81,7 +82,6 @@ std::pair<std::size_t, std::size_t> Maze::end() const {
     return end_;
 }
 
-
 void Maze::printNumericMaze() const {
     std::cout << "\n";
     for (const auto& row : grid_) {
@@ -91,6 +91,28 @@ void Maze::printNumericMaze() const {
         }
         std::cout << "\n";
     }
+}
+
+void Maze::printWithoutSolution() const {
+    std::cout << "\n";
+    for (const auto& row : chargrid_) {
+        std::cout << row << "\n";
+    }
+    std::cout << "\n";
+}
+
+void Maze::printWithSolution(const std::vector<std::pair<std::size_t, std::size_t>>& solution) {
+    std::cout << "\n";
+    std::vector<std::string> chargridSolved = chargrid_;
+    for (const auto& [row, col] : solution) {
+        if (chargrid_[row][col] != 'S' && chargrid_[row][col] != 'E') {
+            chargrid_[row][col] = '*';
+        }
+    }
+    for (const auto& row : chargrid_) {
+        std::cout << row << "\n";
+    }
+    std::cout << "\n";
 }
 
 

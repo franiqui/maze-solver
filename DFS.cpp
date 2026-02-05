@@ -1,4 +1,5 @@
 #include "DFS.h"
+#include <algorithm>
 
 DFS::DFS(Maze& maze) : Solver(maze) {};
 
@@ -14,6 +15,9 @@ void DFS::pushNeighbours(std::size_t row, std::size_t col) {
         if(isVisited(nextRow, nextCol)) {
             continue;
         }
+
+        parent_[nextRow][nextCol] = {row, col};
+
         visit(nextRow, nextCol);
         stack_.push({nextRow,nextCol});
     }
@@ -26,6 +30,14 @@ bool DFS::dfs() {
         auto [r, c] = stack_.top();
         stack_.pop();
         if (maze_.isExit(r,c)) {
+            solution_.clear();
+            std::pair<std::size_t,std::size_t> current{r,c};
+            while (current != maze_.start()) {
+                solution_.push_back(current);
+                current = parent_[current.first][current.second];
+            }
+            solution_.push_back(maze_.start());
+            std::reverse(solution_.begin(), solution_.end());
             return true;
         }
         pushNeighbours(r, c);
