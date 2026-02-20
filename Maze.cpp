@@ -106,10 +106,10 @@ void Maze::printWithSolution(const std::vector<std::pair<std::size_t, std::size_
     std::vector<std::string> chargridSolved = chargrid_;
     for (const auto& [row, col] : solution) {
         if (chargrid_[row][col] != 'S' && chargrid_[row][col] != 'E') {
-            chargrid_[row][col] = '*';
+            chargridSolved[row][col] = '*';
         }
     }
-    for (const auto& row : chargrid_) {
+    for (const auto& row : chargridSolved) {
         std::cout << row << "\n";
     }
     std::cout << "\n";

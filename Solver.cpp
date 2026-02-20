@@ -3,6 +3,7 @@
 Solver::Solver(Maze& maze) : maze_(maze) {
     visited_.assign(maze_.totalRows(), std::vector<bool>(maze_.totalCols()));
     parent_.assign(maze_.totalRows(), std::vector<std::pair<std::size_t, std::size_t>>(maze_.totalCols(),{0,0}));
+    solution_.clear();
 }
 
 bool Solver::canMove(int nextRow, int nextCol) {
