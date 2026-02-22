@@ -42,9 +42,9 @@ void Maze::ValidInput(const std::vector<std::string>& grid) const {
             if (element == 'E') exitCount++;
         }
     }
-    if (startCount != 1 || exitCount != 1) {
-        throw std::invalid_argument("There should only be 1 Start and 1 End");
-    }
+    // if (startCount != 1 || exitCount != 1) {
+    //     throw std::invalid_argument("There should only be 1 Start and 1 End");
+    // }
 }
 
 int Maze::charToInt(char c) const {
